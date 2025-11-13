@@ -4,6 +4,7 @@ package com.crudMySql.demo.services;
 import com.crudMySql.demo.models.Usuario;
 import org.springframework.stereotype.Service;
 import com.crudMySql.demo.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
@@ -25,7 +26,10 @@ public class UsuarioService {
         );
     }
 
+    @Transactional
     public void deletarUsuarioPorEmail(String email) {
+        repository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
         repository.deleteByEmail(email);
     }
 
