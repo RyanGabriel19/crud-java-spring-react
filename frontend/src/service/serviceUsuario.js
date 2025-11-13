@@ -21,13 +21,28 @@ export const salvarUsuario = async (usuario) => {
 };
 
 export const atualizarUsuario = async (id, usuario) => {
-  await fetch(`${API_URL}?id=${id}`, {
+  const response = await fetch(`${API_URL}?id=${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(usuario)
   });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Falha ao atualizar usuário. Status: ' + response.status);
+  }
 };
 
-export const deletarUsuario = async (email) => {
-  await fetch(`${API_URL}?email=${email}`, { method: "DELETE" });
+export const atualizarUsuario = async (id, usuario) => {
+  const response = await fetch(`${API_URL}?id=${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(usuario)
+  });
+
+  // Verifica se a resposta do backend NÃO foi um sucesso
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Falha ao atualizar usuário. Status: ' + response.status);
+  }
 };
