@@ -8,11 +8,16 @@ export const buscarUsuarioPorEmail = async (email) => {
 };
 
 export const salvarUsuario = async (usuario) => {
-  await fetch(API_URL, {
+  const response = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(usuario)
   });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Falha ao salvar usuário. Status: ' + response.status);
+  }
 };
 
 export const atualizarUsuario = async (id, usuario) => {
