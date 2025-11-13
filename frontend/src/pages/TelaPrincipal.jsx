@@ -6,7 +6,6 @@ import {
   atualizarUsuario, 
   deletarUsuario 
 } from "../service/serviceUsuario.js";
-// Certifique-se que o caminho para o CSS esteja correto (usando o seu CSS estilizado)
 import "./tela.css"; 
 
 export default function TelaPrincipal1() {
@@ -38,7 +37,9 @@ export default function TelaPrincipal1() {
       alert("Usuário cadastrado com sucesso!");
       fecharModal();
     } catch (error) {
-      setErro("Erro ao cadastrar: " + error.message);
+      const msgErro = "Erro ao cadastrar: " + error.message;
+      setErro(msgErro);
+      alert(msgErro); // <-- ADICIONE ESTE AVISO DE ERRO
     }
   };
 
@@ -58,7 +59,9 @@ export default function TelaPrincipal1() {
         setErro("Usuário não encontrado.");
       }
     } catch (error) {
-      setErro("Erro ao buscar usuário.");
+      const msgErro = "Erro ao listar: " + error.message;
+      setErro(msgErro);
+      alert(msgErro); // <-- ADICIONE ESTE AVISO DE ERRO
       setUsuarioBuscado(null);
     }
   };
@@ -74,7 +77,9 @@ export default function TelaPrincipal1() {
       alert("Usuário atualizado com sucesso!");
       fecharModal();
     } catch (error) {
-      setErro("Erro ao atualizar: " + error.message);
+      const msgErro = "Erro ao atualizar: " + error.message;
+      setErro(msgErro);
+      alert(msgErro); // <-- ADICIONE ESTE AVISO DE ERRO
     }
   };
 
@@ -89,7 +94,9 @@ export default function TelaPrincipal1() {
       alert("Usuário deletado com sucesso!");
       fecharModal();
     } catch (error) {
-      setErro("Erro ao deletar: Usuário não encontrado ou erro de conexão.");
+      const msgErro = "Erro ao deletar: " + error.message;
+      setErro(msgErro);
+      alert(msgErro);
     }
   };
 
